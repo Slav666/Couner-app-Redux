@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement } from "./actions";
+import "./App.css";
 
 function App() {
+  const counter = useSelector((state) => state.counter);
+  const logged = useSelector((state) => state.logged);
+  const dispatch = useDispatch();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Counter: {counter}</h1>
+      <button onClick={() => dispatch(increment())}>+</button>
+      <button onClick={() => dispatch(decrement())}>-</button>
+      {logged ? <h3>Valuable information I shouldn't see </h3> : ""}
     </div>
   );
 }
